@@ -1,0 +1,31 @@
+package com.example;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AppConfig {
+
+    private int hey;
+    private String nombre;
+    private final int hola;
+
+    public int getHey() {
+        return hey;
+    }
+
+    public void setHey(int hey) {
+        this.hey = hey;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getHola() {
+        return hola;
+    }
+}
