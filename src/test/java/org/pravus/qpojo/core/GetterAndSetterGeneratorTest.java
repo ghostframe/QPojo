@@ -20,7 +20,7 @@ public class GetterAndSetterGeneratorTest extends TestFromResourceFolders {
         String expected = readExpectedFile(getFolder());
 
         System.out.println("-------------------" + getFolder() + "--------------------");
-        String output = getterAndSetterGenerator.generate(input);
+        String output = getterAndSetterGenerator.generateFor(input);
         System.out.println("---------------------------------------");
 
         assertEquals(expected, output);

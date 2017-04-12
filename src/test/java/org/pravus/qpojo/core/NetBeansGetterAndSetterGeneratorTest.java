@@ -4,7 +4,7 @@ import javax.swing.JTextArea;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.netbeans.modules.editor.NbEditorDocument;
-import org.pravus.qpojo.util.DocumentHandler;
+import org.pravus.qpojo.util.DocumentTemplate;
 
 public class NetBeansGetterAndSetterGeneratorTest extends TestFromResourceFolders {
 
@@ -18,10 +18,10 @@ public class NetBeansGetterAndSetterGeneratorTest extends TestFromResourceFolder
     @Test
     public void test() {
         NbEditorDocument inputDocument = new NbEditorDocument("application/x-java");
-        DocumentHandler inputDocumentHandler = new DocumentHandler(inputDocument)
+        DocumentTemplate inputDocumentHandler = new DocumentTemplate(inputDocument)
                 .append(TestResourceUtils.readInputFile(getFolder()));
         NbEditorDocument expectedDocument = new NbEditorDocument("application/x-java");
-        String expectedText = new DocumentHandler(expectedDocument)
+        String expectedText = new DocumentTemplate(expectedDocument)
                 .append(TestResourceUtils.readExpectedFile(getFolder()))
                 .getText();
 

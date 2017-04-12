@@ -19,21 +19,21 @@ public class GetterAndSetterGeneratorImpl implements GetterAndSetterGenerator {
     }
 
     @Override
-    public String generate(String inputCode) {
+    public String generateFor(String inputCode) {
         CompilationUnit code = JavaParser.parse(inputCode);
-        TypeDeclaration<?> type = code.getTypes().get(0);
-        deleteGettersAndSetters(type);
-        createGettersAndSetters(type.getFields());
+        TypeDeclaration<?> firstDeclaredClass = code.getTypes().get(0);
+        deleteGettersAndSettersFromClass(firstDeclaredClass);
+        createGettersAndSettersForFields(firstDeclaredClass.getFields());
         return codeFormatter.format(code);
     }
 
-    private void createGettersAndSetters(List<FieldDeclaration> fields) {
+    private void createGettersAndSettersForFields(List<FieldDeclaration> fields) {
         for (FieldDeclaration field : fields) {
             if (field.isPrivate() && !field.isStatic()) {
                 MethodDeclaration method = field.createGetter();
                 if (isBoolean(field)) {
-                    //Replace "get" with "is"
-                    method.setName("is" + method.getNameAsString().substring(3));
+                    String originalName = method.getName().toString();
+                    method.setName(originalName.replaceFirst("get", "is"));
                 }
                 if (!field.isFinal()) {
                     field.createSetter();
@@ -46,7 +46,7 @@ public class GetterAndSetterGeneratorImpl implements GetterAndSetterGenerator {
         return field.getVariable(0).getType().toString().equals("boolean");
     }
 
-    private void deleteGettersAndSetters(TypeDeclaration<?> type) {
+    private void deleteGettersAndSettersFromClass(TypeDeclaration<?> type) {
         List<MethodDeclaration> methods = type.getMethods();
         for (MethodDeclaration method : methods) {
             if (startsWithGetSetIs(method.getNameAsString()) 

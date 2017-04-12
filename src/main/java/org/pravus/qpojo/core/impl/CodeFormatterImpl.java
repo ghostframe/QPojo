@@ -6,7 +6,7 @@ import java.util.List;
 import org.pravus.qpojo.core.CodeFormatter;
 import static org.pravus.qpojo.util.TextUtils.SYSTEM_END_OF_LINE;
 
-public class CodeFormatterPositionImpl implements CodeFormatter {
+public class CodeFormatterImpl implements CodeFormatter {
 
     @Override
     public String format(CompilationUnit compilationUnit) {

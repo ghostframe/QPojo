@@ -1,6 +1,6 @@
 package org.pravus.qpojo.core;
 
-import org.pravus.qpojo.util.DocumentHandler;
+import org.pravus.qpojo.util.DocumentTemplate;
 import difflib.PatchFailedException;
 import javax.swing.text.BadLocationException;
 import static org.junit.Assert.assertEquals;
@@ -20,9 +20,9 @@ public class DocumentPatcherTest extends TestFromResourceFolders {
 
     @Test
     public void patchToObtain() throws BadLocationException, PatchFailedException {
-        DocumentHandler document = new DocumentHandler(new NbEditorDocument("text/x-java"))
+        DocumentTemplate document = new DocumentTemplate(new NbEditorDocument("text/x-java"))
                 .append(readInputFile(getFolder()));
-        String expectedText = new DocumentHandler(new NbEditorDocument("text/x-java"))
+        String expectedText = new DocumentTemplate(new NbEditorDocument("text/x-java"))
                 .append(readExpectedFile(getFolder()))
                 .getText();
 

@@ -8,11 +8,11 @@ package org.pravus.qpojo.util;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
-public class DocumentHandler {
+public class DocumentTemplate {
 
     private final Document document;
 
-    public DocumentHandler(Document document) {
+    public DocumentTemplate(Document document) {
         this.document = document;
     }
 
@@ -20,7 +20,7 @@ public class DocumentHandler {
         try {
             return document.getText(0, document.getLength());
         } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
+            throw new IllegalStateException(ex);
         }
     }
 
@@ -29,36 +29,33 @@ public class DocumentHandler {
         append(newText);
     }
 
+    public DocumentTemplate append(String text) {
+        insert(text, document.getLength());
+        return this;
+    }
+    
     public void insert(String text, int offset) {
         try {
             document.insertString(offset, text, null);
         } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
+            throw new IllegalArgumentException(ex);
         }
     }
 
-    public DocumentHandler append(String text) {
-        try {
-            document.insertString(document.getLength(), text, null);
-            return this;
-        } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
 
     public void remove(int startPosition, int length) {
         try {
             document.remove(startPosition, length);
         } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
+            throw new IllegalArgumentException(ex);
         }
     }
 
-    public void clear() {
+    private void clear() {
         try {
             document.remove(0, document.getLength());
         } catch (BadLocationException ex) {
-            throw new RuntimeException(ex);
+            throw new IllegalStateException(ex);
         }
     }
 

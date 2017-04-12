@@ -1,6 +1,6 @@
 package org.pravus.qpojo.core.impl;
 
-import org.pravus.qpojo.util.DocumentHandler;
+import org.pravus.qpojo.util.DocumentTemplate;
 import javax.swing.text.JTextComponent;
 import org.netbeans.editor.BaseDocument;
 import org.pravus.qpojo.core.DocumentPatcher;
@@ -21,15 +21,9 @@ public class NetBeansGetterAndSetterGeneratorImpl implements NetBeansGetterAndSe
     @Override
     public void generate(JTextComponent textEditorComponent) {
         final BaseDocument document = (BaseDocument) textEditorComponent.getDocument();
-        final String code = new DocumentHandler(document).getText();
+        final String code = new DocumentTemplate(document).getText();
         int positionBeforeTextChange = textEditorComponent.getCaretPosition();
-        document.runAtomicAsUser(new Runnable() {
-            @Override
-            public void run() {
-                documentPatcher.patch(document, getterAndSetterGenerator.generate(code));
-            }
-
-        });
+        document.runAtomicAsUser(() -> documentPatcher.patch(document, getterAndSetterGenerator.generateFor(code)));
         textEditorComponent.setCaretPosition(Integer.min(positionBeforeTextChange, document.getLength()));
     }
 }
