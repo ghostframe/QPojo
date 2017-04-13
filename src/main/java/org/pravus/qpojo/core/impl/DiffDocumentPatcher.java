@@ -29,10 +29,10 @@ public class DiffDocumentPatcher implements DocumentPatcher {
 
     private void applyDelta(DocumentTemplate documentHandler, Delta<Character> delta) {
         switch (delta.getType()) {
-//            case CHANGE:
-//                applyDeleteDelta(documentHandler, delta);
-//                applyInsertDelta(documentHandler, delta);
-//                break;
+            case CHANGE:
+                applyDeleteDelta(documentHandler, delta);
+                applyInsertDelta(documentHandler, delta);
+                break;
             case DELETE:
                 applyDeleteDelta(documentHandler, delta);
                 break;
