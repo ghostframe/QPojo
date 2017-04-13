@@ -9,7 +9,6 @@ import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle.Messages;
-//import org.openide.util.NbBundle.Messages;
 import org.pravus.qpojo.core.Factory;
 import org.pravus.qpojo.core.NetBeansGetterAndSetterGenerator;
 
@@ -18,10 +17,8 @@ import org.pravus.qpojo.core.NetBeansGetterAndSetterGenerator;
 @ActionRegistration(displayName = "#CTL_RebuildGettersAndSettersAction")
 @Messages("CTL_RebuildGettersAndSettersAction=Rebuild getters and Setters")
 @ActionReferences({
-    @ActionReference(path = "Menu/Source", position = 350)
-    ,
-    @ActionReference(path = "Editors/text/x-java/Actions", position = 1590)
-    ,
+    @ActionReference(path = "Menu/Source", position = 350),
+    @ActionReference(path = "Editors/text/x-java/Actions", position = 1590),
     @ActionReference(path = "Shortcuts", name = "OS-G")})
 public final class RebuildGettersAndSettersAction implements ActionListener {
 
@@ -33,13 +30,9 @@ public final class RebuildGettersAndSettersAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ev) {
-        try {
-            JTextComponent editorTextComponent = EditorRegistry.lastFocusedComponent();
-            if (editorTextComponent != null) {
-                swingGetterAndSetterGenerator.generate(editorTextComponent);
-            }
-        } catch (Exception ex) {
-            
+        JTextComponent editorTextComponent = EditorRegistry.lastFocusedComponent();
+        if (editorTextComponent != null) {
+            swingGetterAndSetterGenerator.generate(editorTextComponent);
         }
     }
 }

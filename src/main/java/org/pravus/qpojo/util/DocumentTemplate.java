@@ -24,16 +24,11 @@ public class DocumentTemplate {
         }
     }
 
-    public void setText(String newText) {
-        clear();
-        append(newText);
-    }
-
     public DocumentTemplate append(String text) {
         insert(text, document.getLength());
         return this;
     }
-    
+
     public void insert(String text, int offset) {
         try {
             document.insertString(offset, text, null);
@@ -42,20 +37,11 @@ public class DocumentTemplate {
         }
     }
 
-
     public void remove(int startPosition, int length) {
         try {
             document.remove(startPosition, length);
         } catch (BadLocationException ex) {
             throw new IllegalArgumentException(ex);
-        }
-    }
-
-    private void clear() {
-        try {
-            document.remove(0, document.getLength());
-        } catch (BadLocationException ex) {
-            throw new IllegalStateException(ex);
         }
     }
 

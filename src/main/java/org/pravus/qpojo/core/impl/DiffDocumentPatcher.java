@@ -3,13 +3,13 @@ package org.pravus.qpojo.core.impl;
 import difflib.Delta;
 import difflib.DiffUtils;
 import difflib.Patch;
-import org.pravus.qpojo.util.DocumentTemplate;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.text.Document;
 import org.pravus.qpojo.core.DocumentPatcher;
-import static org.pravus.qpojo.util.ListAndStringUtils.stringToCharacterList;
+import org.pravus.qpojo.util.DocumentTemplate;
 import static org.pravus.qpojo.util.ListAndStringUtils.characterListToString;
+import static org.pravus.qpojo.util.ListAndStringUtils.stringToCharacterList;
 import static org.pravus.qpojo.util.TextUtils.NETBEANS_END_OF_LINE;
 import static org.pravus.qpojo.util.TextUtils.SYSTEM_END_OF_LINE;
 
@@ -29,15 +29,17 @@ public class DiffDocumentPatcher implements DocumentPatcher {
 
     private void applyDelta(DocumentTemplate documentHandler, Delta<Character> delta) {
         switch (delta.getType()) {
-            case CHANGE:
-                applyDeleteDelta(documentHandler, delta);
-                applyInsertDelta(documentHandler, delta);
-                break;
+//            case CHANGE:
+//                applyDeleteDelta(documentHandler, delta);
+//                applyInsertDelta(documentHandler, delta);
+//                break;
             case DELETE:
                 applyDeleteDelta(documentHandler, delta);
                 break;
             case INSERT:
                 applyInsertDelta(documentHandler, delta);
+                break;
+            default:
                 break;
         }
     }
