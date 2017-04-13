@@ -50,11 +50,8 @@
         </repository>
     </repositories>
     <dependencies>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-api-annotations-common</artifactId>
-            <version>${netbeans.release}</version>
-        </dependency>
+        
+        <!-- Classpath libraries -->
         <dependency>
             <groupId>com.github.javaparser</groupId>
             <artifactId>javaparser-core</artifactId>
@@ -64,6 +61,13 @@
             <groupId>com.googlecode.java-diff-utils</groupId>
             <artifactId>diffutils</artifactId>
             <version>1.3.0</version>
+        </dependency>
+        
+        <!-- Netbeans modules -->
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-api-annotations-common</artifactId>
+            <version>${netbeans.release}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -85,15 +89,19 @@
             <artifactId>org-openide-util</artifactId>
             <version>${netbeans.release}</version>
         </dependency>
+        
+        <!-- Test dependencies -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <properties>
