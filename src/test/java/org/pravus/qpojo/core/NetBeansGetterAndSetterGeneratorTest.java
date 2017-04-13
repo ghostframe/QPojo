@@ -4,12 +4,12 @@ import javax.swing.JTextArea;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.netbeans.modules.editor.NbEditorDocument;
+import static org.pravus.qpojo.core.MimeUtils.JAVA_MIME_TYPE;
 import org.pravus.qpojo.util.DocumentTemplate;
 
 public class NetBeansGetterAndSetterGeneratorTest {
 
     private final NetBeansGetterAndSetterGenerator netBeansGetterAndSetterGenerator;
-    private static final String JAVA_MIME_TYPE = "application/x-java";
 
     public NetBeansGetterAndSetterGeneratorTest() {
         netBeansGetterAndSetterGenerator = Factory.getNetBeansGetterAndSetterGenerator();
