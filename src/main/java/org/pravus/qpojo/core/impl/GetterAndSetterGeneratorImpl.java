@@ -5,7 +5,6 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
-import com.github.javaparser.printer.PrettyPrinterConfiguration;
 import java.util.List;
 import org.pravus.qpojo.core.GetterAndSetterGenerator;
 import static org.pravus.qpojo.util.TextUtils.SYSTEM_END_OF_LINE;
@@ -15,13 +14,14 @@ public class GetterAndSetterGeneratorImpl implements GetterAndSetterGenerator {
     @Override
     public String generateFor(String inputCode) {
         CompilationUnit code = JavaParser.parse(inputCode);
-        TypeDeclaration<?> firstDeclaredClass = code.getTypes().get(0);
-        deleteGettersAndSettersFromClass(firstDeclaredClass);
-        createGettersAndSettersForFields(firstDeclaredClass.getFields());
+        TypeDeclaration firstDeclaredClass = code.getTypes().get(0);
+        deleteGettersAndSetters(firstDeclaredClass);
+        createGettersAndSetters(firstDeclaredClass);
         return cleanupGetterAndSetterDoubleEOL(code);
     }
 
-    private void createGettersAndSettersForFields(List<FieldDeclaration> fields) {
+    private void createGettersAndSetters(TypeDeclaration typeDeclaration) {
+        List<FieldDeclaration> fields = typeDeclaration.getFields();
         for (FieldDeclaration field : fields) {
             if (field.isPrivate() && !field.isStatic()) {
                 MethodDeclaration method = field.createGetter();
@@ -40,7 +40,7 @@ public class GetterAndSetterGeneratorImpl implements GetterAndSetterGenerator {
         return field.getVariable(0).getType().toString().equals("boolean");
     }
 
-    private void deleteGettersAndSettersFromClass(TypeDeclaration<?> type) {
+    private void deleteGettersAndSetters(TypeDeclaration<?> type) {
         List<MethodDeclaration> methods = type.getMethods();
         for (MethodDeclaration method : methods) {
             if (startsWithGetSetIs(method.getNameAsString()) 
@@ -79,5 +79,5 @@ public class GetterAndSetterGeneratorImpl implements GetterAndSetterGenerator {
     private static String getFirstFieldDeclaration(List<FieldDeclaration> fields) {
         return fields.get(0).getVariables().get(0).toString();
     }
-
+    
 }
