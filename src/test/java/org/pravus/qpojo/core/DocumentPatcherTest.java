@@ -9,21 +9,22 @@ import org.netbeans.modules.editor.NbEditorDocument;
 import static org.pravus.qpojo.core.TestResourceUtils.readInputFile;
 import static org.pravus.qpojo.core.TestResourceUtils.readExpectedFile;
 
-public class DocumentPatcherTest extends TestFromResourceFolders {
+public class DocumentPatcherTest {
 
-    private final DocumentPatcher documentPatcher;
+    DocumentPatcher documentPatcher;
 
-    public DocumentPatcherTest(String folder) {
-        super(folder);
+    public DocumentPatcherTest() {
         documentPatcher = Factory.getDocumentPatcher();
     }
 
     @Test
-    public void patchToObtain() throws BadLocationException, PatchFailedException {
+    public void patchToObtain_GettersAndSettersPrivateFieldsAnnotations() throws BadLocationException, PatchFailedException {
+        String testCase = "GettersAndSetters_PrivateFieldsAnnotations";
+        
         DocumentTemplate document = new DocumentTemplate(new NbEditorDocument("text/x-java"))
-                .append(readInputFile(getFolder()));
+                .append(readInputFile(testCase));
         String expectedText = new DocumentTemplate(new NbEditorDocument("text/x-java"))
-                .append(readExpectedFile(getFolder()))
+                .append(readExpectedFile(testCase))
                 .getText();
 
         documentPatcher.patch(document.getDocument(), expectedText);
